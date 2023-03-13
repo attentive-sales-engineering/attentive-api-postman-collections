@@ -1,0 +1,1058 @@
+{
+	"info": {
+		"_postman_id": "ae3ee09f-07c4-44dc-b73c-c57d2ff7e250",
+		"name": "Attentive REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24320149"
+	},
+	"item": [
+		{
+			"name": "Test Authentication",
+			"item": [
+				{
+					"name": "Me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/me",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"me"
+							]
+						},
+						"description": "Make a call to this endpoint to list all subscription types and channels a user is subscribed to. You can query for a subscriber using either their phone number or email. One of the query parameters is required in order to look up a subscriber. As an example, you can use this endpoint to check if a subscriber is eligible to receive SMS or email campaigns, and then send them a message based on that eligibility.\n\n[https://docs.attentivemobile.com/openapi/reference/tag/Subscribers/#tag/Subscribers/operation/getSubscriptions](https://docs.attentivemobile.com/openapi/reference/tag/Subscribers/#tag/Subscribers/operation/getSubscriptions)"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Access Token",
+			"item": [
+				{
+					"name": "Get Access Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"description": "Type of grant. Currently, authorization_code is the only accepted type.",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "{{code}}",
+									"description": "Authorization code provided after the user authorizes the scopes during the application install process.",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"description": "The same redirect URI that was used when requesting the authorization code.",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"description": "The application’s client ID which can be found on the Manage Distribution tab for the application.",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"description": "The application’s client secret which can be found on the Manage Distribution tab for the application.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/authorization-codes/tokens",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"authorization-codes",
+								"tokens"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Subscribers",
+			"item": [
+				{
+					"name": "Subscribe User",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\"\n    },\n    \"signUpSourceId\": \"{{signUpSourceId}}\",\n    \"externalIdentifiers\": {\n        \"clientUserId\": \"{{clientUserId}}\",\n        \"shopifyId\": \"string\",\n        \"klaviyoId\": \"string\",\n        \"customIdentifiers\": [\n            {\n                \"name\": \"string\",\n                \"value\": \"string\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/subscriptions",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Subscriber",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/subscriptions?phone={{phone}}&email={{email}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"subscriptions"
+							],
+							"query": [
+								{
+									"key": "phone",
+									"value": "{{phone}}"
+								},
+								{
+									"key": "email",
+									"value": "{{email}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unsubscribe Subscription",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n      \"phone\": \"{{phone}}\",\n      \"email\": \"{{email}}\"\n    },\n    \"subscriptions\": [\n      {\n        \"type\": \"MARKETING\",\n        \"channel\": \"EMAIL\"\n      },\n      {\n        \"type\": \"MARKETING\",\n        \"channel\": \"TEXT\"\n      }\n    ],\n    \"notification\": {\n      \"language\": \"en-US\"\n    }\n  }"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/subscriptions/unsubscribe",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"subscriptions",
+								"unsubscribe"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "eCommerce",
+			"item": [
+				{
+					"name": "Product View",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\": [\n        {\n            \"productId\": \"AB12345\",\n            \"productVariantId\": \"CD12345\",\n            \"productImage\": \"http://my.cdn.com/products/new-product.png\",\n            \"productUrl\": \"http://my-store.com/products/shirts/my-shirt\",\n            \"name\": \"T-Shirt\",\n            \"price\": [\n                {\n                    \"value\": 19.99,\n                    \"currency\": \"USD\"\n                }\n            ],\n            \"quantity\": 1\n        }\n    ],\n    \"occurredAt\": \"\",\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/events/ecommerce/product-view",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"events",
+								"ecommerce",
+								"product-view"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add to cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\": [\n        {\n            \"productId\": \"AB12345\",\n            \"productVariantId\": \"CD12345\",\n            \"productImage\": \"http://my.cdn.com/products/new-product.png\",\n            \"productUrl\": \"http://my-store.com/products/shirts/my-shirt\",\n            \"name\": \"T-Shirt\",\n            \"price\": [\n                {\n                    \"value\": 19.99,\n                    \"currency\": \"USD\"\n                }\n            ],\n            \"quantity\": 1\n        }\n    ],\n    \"occurredAt\": \"\",\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/events/ecommerce/add-to-cart",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"events",
+								"ecommerce",
+								"add-to-cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Purchase",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\": [\n        {\n            \"productId\": \"AB12345\",\n            \"productVariantId\": \"CD12345\",\n            \"productImage\": \"http://my.cdn.com/products/new-product.png\",\n            \"productUrl\": \"http://my-store.com/products/shirts/my-shirt\",\n            \"name\": \"T-Shirt\",\n            \"price\": [\n                {\n                    \"value\": 19.99,\n                    \"currency\": \"USD\"\n                }\n            ],\n            \"quantity\": 1\n        }\n    ],\n    \"occurredAt\": \"\",\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/events/ecommerce/purchase",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"events",
+								"ecommerce",
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Custom Events",
+			"item": [
+				{
+					"name": "Custom Events",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"Order Shipped\",\n    \"properties\": {\n        \"orderStatusURL\": \"example.com/orderstatus/54321\",\n        \"deliveryDate\": \"2023-03-09T00:00:00Z\",\n        \"orderId\": \"54321\",\n        \"shippingFee\": [\n            {\n                \"value\": 9.99,\n                \"currency\": \"USD\"\n            }\n        ],\n        \"shippingQty\": 1,\n        \"delivered\": true,\n        \"shipment\": {\n            \"carrier\": \"fedex\",\n            \"trackingNumber\": \"12345\"\n        }\n    },\n    \"externalEventId\": \"37fb97a9-6cfd-4983-bd65-68d104d53b70\",\n    \"occurredAt\": \"\",\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/events/custom",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"events",
+								"custom"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Custom Attributes",
+			"item": [
+				{
+					"name": "Custom Attributes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"properties\": {\n        \"favoriteColor\": \"Blue\",\n        \"favoriteTeam\": \"Seahawks\",\n        \"age\": 32,\n        \"registered\": true,\n        \"registrationDate\": \"2023-03-09T00:00:00Z\"\n    },\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/attributes/custom",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"attributes",
+								"custom"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Product Catalog",
+			"item": [
+				{
+					"name": "Upload Product Catalog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"validateOnly\": true\n  }"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/product-catalog/uploads",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"product-catalog",
+								"uploads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lookup Product Catalog Ingestion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/product-catalog/uploads/:uploadId",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"product-catalog",
+								"uploads",
+								":uploadId"
+							],
+							"variable": [
+								{
+									"key": "uploadId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Recent Catalog Uploads",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/product-catalog/uploads",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"product-catalog",
+								"uploads"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Webhooks",
+			"item": [
+				{
+					"name": "List webhooks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/webhooks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"webhooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create webhook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://example.com/webhooks\",\n    \"events\": [\n        \"sms.subscribed\",\n        \"sms.unsubscribed\",\n        \"sms.sent\",\n        \"sms.message_link_click\",\n        \"email.subscribed\",\n        \"email.unsubscribed\",\n        \"email.message_link_click\",\n        \"email.opened\",\n        \"custom_attribute.set\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/webhooks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"webhooks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update webhook",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://example.com/webhooks\",\n    \"events\": [\n        \"sms.sent\",\n        \"sms.subscribed\"\n    ],\n    \"disabled\": true\n}"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/webhooks/:webhookId",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"webhooks",
+								":webhookId"
+							],
+							"variable": [
+								{
+									"key": "webhookId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete webhook",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/webhooks/:webhookId",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"webhooks",
+								":webhookId"
+							],
+							"variable": [
+								{
+									"key": "webhookId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Messages (private)",
+			"item": [
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"to\": \"{{phone}}\",\n    \"subscriptionType\": \"MARKETING\",\n    \"body\": \"Hello from Attentive\",\n    \"mediaUrl\": \"http://my.cdn.com/products/new-product.png\",\n    \"useShortLinks\": true,\n    \"messageName\": \"string\",\n    \"skipFatigue\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/text/send",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"text",
+								"send"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Identity (beta)",
+			"item": [
+				{
+					"name": "Add user identifier",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"{{phone}}\",\n    \"email\": \"{{email}}\",\n    \"shopifyId\": \"123456789000\",\n    \"klaviyoId\": \"0123456789ABCDEFGHIJKLMNOP\",\n    \"clientUserId\": \"{{clientUserId}}\",\n    \"customIdentifiers\": [\n        {\n            \"name\": \"loyaltyId\",\n            \"value\": \"1122334455\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/identity-resolution/user-identifiers",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"identity-resolution",
+								"user-identifiers"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Privacy Request (beta)",
+			"item": [
+				{
+					"name": "Delete Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subjectEmail\": \"{{email}}\",\n  \"subjectPhone\": \"{{phone}}\",\n  \"requestMsg\": \"The subscriber requested to be removed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/privacy/delete-request",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"privacy",
+								"delete-request"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Offers (beta)",
+			"item": [
+				{
+					"name": "Create Coupons - date",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"distributionStart\": \"2023-05-01T00:00:00Z\",\n    \"distributionStop\": \"2023-05-31T00:00:00Z\",\n    \"codes\": [\n        \"jc50\",\n        \"jc51\",\n        \"jc52\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/coupons/coupon-pool/:coupon-pool-id/create",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"coupons",
+								"coupon-pool",
+								":coupon-pool-id",
+								"create"
+							],
+							"variable": [
+								{
+									"key": "coupon-pool-id",
+									"value": "54100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Coupons - no date",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"codes\": [\n        \"john13\",\n        \"john14\",\n        \"john15\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/coupons/coupon-pool/:coupon-pool-id/create",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"coupons",
+								"coupon-pool",
+								":coupon-pool-id",
+								"create"
+							],
+							"variable": [
+								{
+									"key": "coupon-pool-id",
+									"value": "{{coupon-pool-id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{api_key}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

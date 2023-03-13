@@ -1,0 +1,635 @@
+{
+	"info": {
+		"_postman_id": "8e36991c-3bc4-4ec8-8c6a-26f9696aa611",
+		"name": "Attentive GraphQL API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24320149"
+	},
+	"item": [
+		{
+			"name": "Test Authentication",
+			"item": [
+				{
+					"name": "My Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\n  viewer {\n    installedApplication {\n      installerCompany {\n          id\n          name\n      }\n    }\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Subscribers (beta)",
+			"item": [
+				{
+					"name": "Subscribe User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "\nmutation testsubscribe ($input: SubscribeInput!) {\n  subscribe(input: $input) {\n    externalIdentifiers {\n      clientUserId\n      shopifyId\n      customIdentifiers {\n        name\n        value\n      }\n    }\n    subscribeResults {\n      channel\n      type\n      destinationAddress {\n        ... on DestinationEmail {\n          value\n        }\n        ... on DestinationPhone {\n          value\n        }\n      }\n    }\n  }\n}",
+								"variables": "{\n    \"input\": {\n      \"user\": {\n        \"email\": \"{{email}}\",\n        \"phone\": \"{{phone}}\"\n      },\n      \"signupSourceId\": \"{{signUpSourceId}}\",\n      \"externalIdentifiers\": {\n          \"clientUserId\": \"string\",\n          \"customIdentifiers\": [\n              {\n                  \"name\": \"customKey\",\n                  \"value\": \"customValue\"\n              }\n          ]\n      }\n    } \n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Subscriber",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "\nquery {\n  viewer {\n    installedApplication {\n      installerCompany {\n        phonesubscriber: user(phone: \"{{phone}}\") {\n          subscriptions {\n            subscriptionEligibilities {\n              subscription {\n                channel\n                type\n              }\n              eligibility {\n                isEligible\n              }\n            }\n          }\n        }\n        emailSubscriber: user(email: \"{{email}}\") {\n          subscriptions {\n            subscriptionEligibilities {\n              subscription {\n                channel\n                type\n              }\n              eligibility {\n                isEligible\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unsubscribe User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation callUnsubscribe ($input: UnsubscribeInput!) {\n  unsubscribe(input: $input) {\n    unsubscribeResults {\n      channel\n      type\n    }\n  }\n}",
+								"variables": "{\n    \"input\": {\n      \"user\": {\n        \"phone\": \"{{phone}}\"\n      },\n      \"subscriptions\": [\n        {\n            \"channel\": \"CHANNEL_TEXT\",\n            \"type\": \"TYPE_MARKETING\"\n        }\n      ]\n    }\n }"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "eCommerce (beta)",
+			"item": [
+				{
+					"name": "Product View",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation productView($sendInput: SendProductViewEventInput!) {\n    productViewEvent(input: $sendInput) {\n        occurredAt\n        products {\n            productId\n            productPrices {\n                amount\n                currency\n            }\n            quantity\n        }\n        visitor {\n            phone\n            email\n        }\n    }\n}",
+								"variables": "{\n    \"sendInput\": {\n        \"visitor\": {\n            \"email\": \"{{email}}\", \n            \"phone\": \"{{phone}}\"\n        },\n        \"products\": [\n            {\n                \"productId\": \"productId1\",\n                \"productImage\": \"http://my.cdn.com/products/product1.png\",\n                \"productName\": \"Product 1\",\n                \"productVariantId\": \"productVariantId1\",\n                \"quantity\": \"1\",\n                \"productPrices\":[\n                    {\n                        \"amount\":\"15.00\", \"currency\":\"CAD\"\n                    },\n                    {\n                        \"amount\":\"10.00\", \"currency\":\"USD\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"productId2\",\n                \"productImage\": \"http://my.cdn.com/products/product2.png\",\n                \"productName\": \"Product 2\",\n                \"productVariantId\": \"productVariantId2\",\n                \"quantity\": \"1\",\n                \"productPrices\":[\n                    {\n                        \"amount\":\"18.00\", \"currency\":\"CAD\"\n                    },\n                    {\n                        \"amount\":\"12.00\", \"currency\":\"USD\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add To Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation addToCart($sendInput: SendAddProductToCartEventInput!) {\n    addToCartEvent(input: $sendInput) {\n        occurredAt\n        products {\n            productId\n            productPrices {\n                amount\n                currency\n            }\n        }\n        visitor {\n            phone\n            email\n        }\n    }\n}",
+								"variables": "{\n    \"sendInput\": {\n        \"visitor\": {\n            \"email\": \"{{email}}\", \n            \"phone\": \"{{phone}}\"\n        },\n        \"products\": [\n            {\n                \"productId\": \"productId1\",\n                \"productImage\": \"http://my.cdn.com/products/product1.png\",\n                \"productName\": \"Product 1\",\n                \"productVariantId\": \"productVariantId1\",\n                \"quantity\": \"1\",\n                \"productPrices\":[\n                    {\n                        \"amount\":\"15.00\", \"currency\":\"CAD\"\n                    },\n                    {\n                        \"amount\":\"10.00\", \"currency\":\"USD\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"productId2\",\n                \"productImage\": \"http://my.cdn.com/products/product2.png\",\n                \"productName\": \"Product 2\",\n                \"productVariantId\": \"productVariantId2\",\n                \"quantity\": \"1\",\n                \"productPrices\":[\n                    {\n                        \"amount\":\"18.00\", \"currency\":\"CAD\"\n                    },\n                    {\n                        \"amount\":\"12.00\", \"currency\":\"USD\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Purchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation productPurchase($sendInput: SendProductPurchaseEventInput!) {\n    productPurchaseEvent(input: $sendInput) {\n        occurredAt\n        products {\n            productId\n            productPrices {\n                amount\n                currency\n            }\n        }\n        visitor {\n            phone\n            email\n        }\n    }\n}",
+								"variables": "{\n    \"sendInput\": {\n        \"visitor\": {\n            \"email\": \"{{email}}\", \n            \"phone\": \"{{phone}}\"\n        },\n        \"products\": [\n            {\n                \"productId\": \"productId1\",\n                \"productImage\": \"http://my.cdn.com/products/product1.png\",\n                \"productName\": \"Product 1\",\n                \"productVariantId\": \"productVariantId1\",\n                \"quantity\": \"1\",\n                \"productPrices\":[\n                    {\n                        \"amount\":\"15.00\", \"currency\":\"CAD\"\n                    },\n                    {\n                        \"amount\":\"10.00\", \"currency\":\"USD\"\n                    }\n                ]\n            },\n            {\n                \"productId\": \"productId2\",\n                \"productImage\": \"http://my.cdn.com/products/product2.png\",\n                \"productName\": \"Product 2\",\n                \"productVariantId\": \"productVariantId2\",\n                \"quantity\": \"1\",\n                \"productPrices\":[\n                    {\n                        \"amount\":\"18.00\", \"currency\":\"CAD\"\n                    },\n                    {\n                        \"amount\":\"12.00\", \"currency\":\"USD\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Custom Events (beta)",
+			"item": [
+				{
+					"name": "Custom Events",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createCustom($customEventInput: CreateCustomEventInput!) {\n    createCustomEvent(input: $customEventInput) {\n        externalEventId\n        occurredAt\n        properties\n        type\n        user {\n            email\n            phone\n            externalIdentifiers {\n                clientUserId\n                customIdentifiers {\n                    name\n                    value\n                }\n            }\n        }\n    }\n}",
+								"variables": "{\n    \"customEventInput\": {\n        \"type\": \"Order Shipped\",\n        \"externalEventId\": \"37fb97a9-6cfd-4983-bd65-68d104d53b70\",\n        \"properties\": \"{ \\\"carrier\\\": \\\"fedex\\\", \\\"trackingNumber\\\": \\\"12345\\\" }\",\n        \"user\": {\n            \"email\": \"{{email}}\",\n            \"phone\": \"{{phone}}\",\n            \"externalIdentifiers\": {\n                \"clientUserId\": \"{{clientUserId}}\",\n                \"customIdentifiers\": [\n                    {\n                        \"name\": \"customIdentifierName\",\n                        \"value\": \"customIdentifierValue\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Custom Attributes (beta)",
+			"item": [
+				{
+					"name": "Custom Attributes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation setCustom($customAttributesInput: SetCustomAttributesInput!) {\n    setCustomAttributes(input: $customAttributesInput) {\n        properties\n        user {\n            email\n            phone\n            externalIdentifiers {\n                clientUserId\n                customIdentifiers {\n                    name\n                    value\n                }\n            }\n        }\n    }\n}",
+								"variables": "{\n    \"customAttributesInput\": {\n        \"properties\": \"{ \\\"favoriteColor\\\": \\\"Blue\\\", \\\"favoriteTeam\\\": \\\"Seahawks\\\" }\",\n        \"user\": {\n            \"email\": \"{{email}}\",\n            \"phone\": \"{{phone}}\",\n            \"externalIdentifiers\": {\n                \"clientUserId\": \"{{clientUserId}}\",\n                \"customIdentifiers\": [\n                    {\n                        \"name\": \"customIdentifierName\",\n                        \"value\": \"customIdentifierValue\"\n                    }\n                ]\n            }\n        }\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Privacy Requests (beta)",
+			"item": [
+				{
+					"name": "Delete Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation CreatePrivacyDeleteRequest($input: CreatePrivacyDeleteRequestInput!) {\n  createPrivacyDeleteRequest(input: $input) {\n      privacyRequest  {\n          subjectEmail,\n          subjectPhone,\n          requestMsg,\n          requestDateTime\n      }\n  }\n}\n  ",
+								"variables": "{\n    \"input\" : {\n        \"subjectPhone\" : \"{{phone}}\",\n        \"subjectEmail\": \"{{email}}\",\n        \"requestMsg\": \"The subscriber requested to be removed\"\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Webhooks (beta)",
+			"item": [
+				{
+					"name": "Get Webhooks",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\n    viewer {\n        installedApplication {\n            webhooks {\n                id\n                url\n                events\n                disabledAt\n            }\n        }\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Webhook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query {\n  node(id: \"{{webhookId}}\") {\n    ... on Webhook {\n        id\n        url\n        events\n        disabledAt\n      } \n   }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Webhook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createWebhook($input: CreateWebhookInput!) {\n  createWebhook(input: $input) {\n      webhook  {\n          id,\n          url,\n          events,\n      }\n  }\n}",
+								"variables": "{\n    \"input\" : {\n        \"url\": \"https://test.com\", \n        \"events\":[\n            \"sms.subscribed\",\n            \"sms.unsubscribed\",\n            \"sms.sent\",\n            \"sms.message_link_click\",\n            \"email.subscribed\",\n            \"email.unsubscribed\",\n            \"email.message_link_click\",\n            \"email.opened\",\n            \"custom_attribute.set\"\n        ]\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Webhook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updateWebhook($input: UpdateWebhookInput!) {\n  updateWebhook(input: $input) {\n      webhook  {\n          id,\n          url,\n          events,\n          disabledAt,\n      }\n  }\n}",
+								"variables": "{\n    \"input\" : {\n        \"id\": \"MDc6V2ViaG9vazE1NDc\",\n        \"url\": \"https://test.com/webhook\", \n        \"events\":[\n            \"custom_attribute.set\"\n        ],\n        \"disabled\": false\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable a Webhook",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation deleteWebhook($input: DeleteWebhookInput!) {\n  deleteWebhook(input: $input) {\n      deleted\n  }\n}",
+								"variables": "{\n    \"input\" : {\n        \"id\": \"MDc6V2ViaG9vazE1NDc\"\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "https://api.attentivemobile.com/v1/graphql",
+							"protocol": "https",
+							"host": [
+								"api",
+								"attentivemobile",
+								"com"
+							],
+							"path": [
+								"v1",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{api_key}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
