@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ae3ee09f-07c4-44dc-b73c-c57d2ff7e250",
+		"_postman_id": "bc0db337-4f59-4c71-af0c-10cbf508bf63",
 		"name": "Attentive REST API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24320149"
@@ -13,14 +13,7 @@
 					"name": "Me",
 					"request": {
 						"method": "GET",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
+						"header": [],
 						"url": {
 							"raw": "https://api.attentivemobile.com/v1/me",
 							"protocol": "https",
@@ -287,7 +280,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"productId\": \"AB12345\",\n            \"productVariantId\": \"CD12345\",\n            \"productImage\": \"http://my.cdn.com/products/new-product.png\",\n            \"productUrl\": \"http://my-store.com/products/shirts/my-shirt\",\n            \"name\": \"T-Shirt\",\n            \"price\": [\n                {\n                    \"value\": 19.99,\n                    \"currency\": \"USD\"\n                }\n            ],\n            \"quantity\": 1\n        }\n    ],\n    \"occurredAt\": \"\",\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
+							"raw": "{\n    \"items\": [\n        {\n            \"productId\": \"AB12345\",\n            \"productVariantId\": \"CD12345\",\n            \"productImage\": \"http://my.cdn.com/products/new-product.png\",\n            \"productUrl\": \"http://my-store.com/products/shirts/my-shirt\",\n            \"name\": \"T-Shirt\",\n            \"price\": [\n                {\n                    \"value\": 19.99,\n                    \"currency\": \"USD\"\n                }\n            ],\n            \"quantity\": 1\n        }\n    ],\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.attentivemobile.com/v1/events/ecommerce/product-view",
@@ -319,7 +312,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"productId\": \"AB12345\",\n            \"productVariantId\": \"CD12345\",\n            \"productImage\": \"http://my.cdn.com/products/new-product.png\",\n            \"productUrl\": \"http://my-store.com/products/shirts/my-shirt\",\n            \"name\": \"T-Shirt\",\n            \"price\": [\n                {\n                    \"value\": 19.99,\n                    \"currency\": \"USD\"\n                }\n            ],\n            \"quantity\": 1\n        }\n    ],\n    \"occurredAt\": \"\",\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
+							"raw": "{\n    \"items\": [\n        {\n            \"productId\": \"AB12345\",\n            \"productVariantId\": \"CD12345\",\n            \"productImage\": \"http://my.cdn.com/products/new-product.png\",\n            \"productUrl\": \"http://my-store.com/products/shirts/my-shirt\",\n            \"name\": \"T-Shirt\",\n            \"price\": [\n                {\n                    \"value\": 19.99,\n                    \"currency\": \"USD\"\n                }\n            ],\n            \"quantity\": 1\n        }\n    ],\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.attentivemobile.com/v1/events/ecommerce/add-to-cart",
@@ -351,7 +344,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"items\": [\n        {\n            \"productId\": \"AB12345\",\n            \"productVariantId\": \"CD12345\",\n            \"productImage\": \"http://my.cdn.com/products/new-product.png\",\n            \"productUrl\": \"http://my-store.com/products/shirts/my-shirt\",\n            \"name\": \"T-Shirt\",\n            \"price\": [\n                {\n                    \"value\": 19.99,\n                    \"currency\": \"USD\"\n                }\n            ],\n            \"quantity\": 1\n        }\n    ],\n    \"occurredAt\": \"\",\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
+							"raw": "{\n    \"items\": [\n        {\n            \"productId\": \"AB12345\",\n            \"productVariantId\": \"CD12345\",\n            \"productImage\": \"http://my.cdn.com/products/new-product.png\",\n            \"productUrl\": \"http://my-store.com/products/shirts/my-shirt\",\n            \"name\": \"T-Shirt\",\n            \"price\": [\n                {\n                    \"value\": 19.99,\n                    \"currency\": \"USD\"\n                }\n            ],\n            \"quantity\": 1\n        }\n    ],\n    \"user\": {\n        \"phone\": \"{{phone}}\",\n        \"email\": \"{{email}}\",\n        \"externalIdentifiers\": {\n            \"clientUserId\": \"{{clientUserId}}\",\n            \"customIdentifiers\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]\n        }\n    }\n}"
 						},
 						"url": {
 							"raw": "https://api.attentivemobile.com/v1/events/ecommerce/purchase",
@@ -726,62 +719,6 @@
 									"key": "webhookId",
 									"value": ""
 								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			]
-		},
-		{
-			"name": "Messages (private)",
-			"item": [
-				{
-					"name": "Send Message",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"to\": \"{{phone}}\",\n    \"subscriptionType\": \"MARKETING\",\n    \"body\": \"Hello from Attentive\",\n    \"mediaUrl\": \"http://my.cdn.com/products/new-product.png\",\n    \"useShortLinks\": true,\n    \"messageName\": \"string\",\n    \"skipFatigue\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://api.attentivemobile.com/v1/text/send",
-							"protocol": "https",
-							"host": [
-								"api",
-								"attentivemobile",
-								"com"
-							],
-							"path": [
-								"v1",
-								"text",
-								"send"
 							]
 						}
 					},
